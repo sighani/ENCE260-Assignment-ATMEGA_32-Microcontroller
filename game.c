@@ -39,7 +39,7 @@ int main (void)
         if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
             display_character ('R');
             ir_uart_putc('R');
-            count++;
+            //count++;
             if (ir_uart_read_ready_p()) {
                 if (ir_uart_getc() == 'R') {
                     display_character('0');
@@ -52,7 +52,7 @@ int main (void)
         } else if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
             display_character ('P');
             ir_uart_putc('P');
-            count++;
+            //count++;
             if (ir_uart_read_ready_p()) {
                 if (ir_uart_getc() == 'P') {
                     display_character('0');
@@ -65,7 +65,7 @@ int main (void)
         } else if (navswitch_push_event_p(NAVSWITCH_WEST)) {
             display_character ('S');
             ir_uart_putc('S');
-            count++;
+            //count++;
             if (ir_uart_read_ready_p()) {
                 if (ir_uart_getc() == 'S') {
                     display_character('0');
