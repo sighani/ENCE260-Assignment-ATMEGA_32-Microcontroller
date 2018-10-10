@@ -31,7 +31,7 @@ int main (void)
 
     while (1)
     {
-        int count =0;
+        //int count =0;
         pacer_wait ();
         tinygl_update ();
         navswitch_update();
@@ -49,7 +49,7 @@ int main (void)
                     display_character('L');
                 }
             }
-        } else if (navswitch_push_event_p(NAVSWITCH_SOUTH) && count == 1) {
+        } else if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
             display_character ('P');
             ir_uart_putc('P');
             count++;
@@ -62,7 +62,7 @@ int main (void)
                     display_character('W');
                 }
             }
-        } else if (navswitch_push_event_p(NAVSWITCH_WEST) && count == 2) {
+        } else if (navswitch_push_event_p(NAVSWITCH_WEST)) {
             display_character ('S');
             ir_uart_putc('S');
             count++;
