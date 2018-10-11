@@ -1,9 +1,11 @@
 #include "system.h"
 #include "pacer.h"
+#include "button.h"
+#include "pio.h"
+#include "com.h"
 #include "navswitch.h"
-#include "ir_uart.h"
 #include "tinygl.h"
-#include "../fonts/font5x7_1.h"
+#include "ir_uart.h"
 
 #define PACER_RATE 2000
 #define MESSAGE_RATE 10
