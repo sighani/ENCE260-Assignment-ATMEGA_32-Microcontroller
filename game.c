@@ -2,7 +2,7 @@
 #include "pacer.h"
 #include "button.h"
 #include "pio.h"
-#include "com.h"
+#include "../fonts/font5x7_1.h"
 #include "navswitch.h"
 #include "tinygl.h"
 #include "ir_uart.h"

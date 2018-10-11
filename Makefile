@@ -12,11 +12,11 @@ DEL = rm
 
 
 # Default target.
-all: gametest.out
+all: game.out
 
 
 # Compile: create object files from C source files.
-gametest.o: gametest.c ../../drivers/avr/ir_uart.h ../../drivers/avr/system.h ../../drivers/display.h ../../drivers/navswitch.h ../../fonts/font5x7_1.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h
+game.o: game.c ../../drivers/avr/ir_uart.h ../../drivers/avr/system.h ../../drivers/display.h ../../drivers/navswitch.h ../../fonts/font5x7_1.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h
 		$(CC) -c $(CFLAGS) $< -o $@
 
 ir_uart.o: ../../drivers/avr/ir_uart.c ../../drivers/avr/ir_uart.h ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/avr/timer0.h ../../drivers/avr/usart1.h
@@ -64,7 +64,7 @@ led.o: ../../drivers/led.c ../../drivers/avr/pio.h ../../drivers/avr/system.h ..
 
 
 # Link: create ELF output file from object files.
-gametest.out: gametest.o ir_uart.o pio.o prescale.o system.o timer.o timer0.o usart1.o display.o ledmat.o navswitch.o font.o pacer.o tinygl.o led.o
+game.out: game.o ir_uart.o pio.o prescale.o system.o timer.o timer0.o usart1.o display.o ledmat.o navswitch.o font.o pacer.o tinygl.o led.o
 		$(CC) $(CFLAGS) $^ -o $@ -lm
 		$(SIZE) $@
 
@@ -77,6 +77,6 @@ clean:mak
 
 # Target: program project.
 .PHONY: program
-program: gametest.out
-		$(OBJCOPY) -O ihex gametest.out gametest.hex
-		dfu-programmer atmega32u2 erase; dfu-programmer atmega32u2 flash gametest.hex; dfu-programmer atmega32u2 start
+program: game.out
+		$(OBJCOPY) -O ihex game.out game.hex
+		dfu-programmer atmega32u2 erase; dfu-programmer atmega32u2 flash game.hex; dfu-programmer atmega32u2 start
