@@ -10,16 +10,16 @@
 #define MESSAGE_RATE 10
 
 /** Define PIO pins driving LED matrix rows.  */
-static const pio_t rows[] =
+/*static const pio_t rows[] =
 {
     LEDMAT_ROW1_PIO, LEDMAT_ROW2_PIO, LEDMAT_ROW3_PIO,
     LEDMAT_ROW4_PIO, LEDMAT_ROW5_PIO, LEDMAT_ROW6_PIO,
     LEDMAT_ROW7_PIO
-};
+};*/
 
 
 /** Define PIO pins driving LED matrix columns.  */
-static const pio_t cols[] =
+/*static const pio_t cols[] =
 {
     LEDMAT_COL1_PIO, LEDMAT_COL2_PIO, LEDMAT_COL3_PIO,
     LEDMAT_COL4_PIO, LEDMAT_COL5_PIO
@@ -49,16 +49,16 @@ static void display_column (uint8_t row_pattern, uint8_t current_column)
 
 
 
-}
+}*/
 
-void welcome (void)
-{
+//void welcome (void)
+//{
 
-    tinygl_text("start!");
-    tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
-}
+  //  tinygl_text("start!");
+    //tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
+//}
 
-void display_board1(void)
+/*void display_board1(void)
 {
      uint8_t current_column = 0;
        static const uint8_t bitmap[] =
@@ -134,7 +134,7 @@ void display_board3(void)
             current_column = 0;
         }
     }
-}
+} */
 
 
 
@@ -157,24 +157,24 @@ int main (void)
     navswitch_init ();
 
     /* TODO: Initialise IR driver.  */
-    //tinygl_text("START!\0");
-    welcome();
-    uint8_t current_column = 0;
+    tinygl_text("START!\0");
+    //welcome();
+    //uint8_t current_column = 0;
 
     system_init ();
     pacer_init (500);
-    pio_config_set (LEDMAT_ROW1_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_ROW2_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_ROW3_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_ROW4_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_ROW5_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_ROW6_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_ROW7_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_COL1_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_COL2_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_COL3_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_COL4_PIO, PIO_OUTPUT_HIGH);
-        pio_config_set (LEDMAT_COL5_PIO, PIO_OUTPUT_HIGH);
+    //pio_config_set (LEDMAT_ROW1_PIO, PIO_OUTPUT_HIGH);
+      //  pio_config_set (LEDMAT_ROW2_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_ROW3_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_ROW4_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_ROW5_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_ROW6_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_ROW7_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_COL1_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_COL2_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_COL3_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_COL4_PIO, PIO_OUTPUT_HIGH);
+        //pio_config_set (LEDMAT_COL5_PIO, PIO_OUTPUT_HIGH);
 
 
 
@@ -185,45 +185,66 @@ int main (void)
         navswitch_update();
         /* TODO: Call the navswitch update function.  */
         if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
-            display_board1();
-            ir_uart_putc('R');
+            display_character('R');
+            //display_board1();
+            //ir_uart_putc('R');
 
-            if (ir_uart_read_ready_p()) {
-                if (ir_uart_getc() == 'R') {
+            if (ir_uart_read_ready_p() == 'R') {
+                //if (ir_uart_getc() == 'R') {
                     display_character('0');
-                } else if (ir_uart_getc() == 'S') {
+                } else if (ir_uart_read_ready_p() == 'S') {
                     display_character('W');
-                } else if (ir_uart_getc() == 'P') {
+                } else if (ir_uart_read_ready_p() == 'P') {
                     display_character('L');
                 }
             }
-        } else if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
-            display_board2();
-            ir_uart_putc('P');
+        else if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
+            display_character('P');
+            //display_board2();
+            //ir_uart_putc('P');
 
-            if (ir_uart_read_ready_p()) {
-                if (ir_uart_getc() == 'P') {
+            //if (ir_uart_read_ready_p()) {
+             //   if (ir_uart_getc() == 'P') {
+              //      display_character('0');
+               // } else if (ir_uart_getc() == 'S') {
+                //    display_character('L');
+                //} else if (ir_uart_getc() == 'R') {
+                 //   display_character('W');
+               // }
+            //}
+            if (ir_uart_read_ready_p() == 'P') {
+                //if (ir_uart_getc() == 'R') {
                     display_character('0');
-                } else if (ir_uart_getc() == 'S') {
-                    display_character('L');
-                } else if (ir_uart_getc() == 'R') {
+                } else if (ir_uart_read_ready_p() == 'R') {
                     display_character('W');
+                } else if (ir_uart_read_ready_p() == 'S') {
+                    display_character('L');
                 }
-            }
+
         } else if (navswitch_push_event_p(NAVSWITCH_WEST)) {
-            display_board3();
-            ir_uart_putc('S');
+            display_character('S');
+            //display_board3();
+            //ir_uart_putc('S');
 
-            if (ir_uart_read_ready_p()) {
-                if (ir_uart_getc() == 'S') {
+            //if (ir_uart_read_ready_p()) {
+             //   if (ir_uart_getc() == 'S') {
+              //      display_character('0');
+               // } else if (ir_uart_getc() == 'P') {
+                //    display_character('W');
+                //} else if (ir_uart_getc() == 'R') {
+                 //   display_character('L');
+                  //  }
+                   // }
+                    //}
+                    if (ir_uart_read_ready_p() == 'S') {
+                //if (ir_uart_getc() == 'R') {
                     display_character('0');
-                } else if (ir_uart_getc() == 'P') {
+                } else if (ir_uart_read_ready_p() == 'R') {
                     display_character('W');
-                } else if (ir_uart_getc() == 'R') {
+                } else if (ir_uart_read_ready_p() == 'P') {
                     display_character('L');
-                    }
-                    }
-                    }
+                }
+            }
                 }
         return 0;
 }
