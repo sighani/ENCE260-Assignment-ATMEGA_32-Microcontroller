@@ -6,6 +6,7 @@
 #include "ir_uart.h"
 #include "tinygl.h"
 #include "../fonts/font5x7_1.h"
+#include <stdbool.h>
 
 #define PACER_RATE 1000
 #define MESSAGE_RATE 25
@@ -35,7 +36,7 @@ static char select_item(void)
     int p2_is_ready = 0;
     char result;
     char p2_choice;
-    char item_select[] = {'R', 'P', 'S'};
+    char item_select[3] = {'R', 'P', 'S'};
 
     while (1) {
         //select from P, R, S
@@ -112,7 +113,7 @@ static char select_item(void)
         }
 
 
-        if (button_push_event_p(1)) {
+        if (button_pressed_p()) {
             p1_is_ready = 0;
             p2_is_ready = 0;
             choice = 0;
