@@ -38,12 +38,19 @@ void welcome (void)
     tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
 }
 
+static void game_reset(void)
+{
+	if (button_pressed_p()) {
+		p1_is_ready = 0;
+		p2_is_ready = 0;
+		choice = 0;
+		led_off();
+	}
+}
 
 static char select_item(void)
 {
     int i = 0;
-
-
     while (1) {
 		pacer_wait ();
 		tinygl_update ();
@@ -83,6 +90,7 @@ static char select_item(void)
                 display_character(item_select[choice]);
             }
         }
+        game_reset();
 	}
 	return item_select[choice];
 }
@@ -124,18 +132,6 @@ void end_result (char player1_state, char p2_choice)
     }
 }
 
-static void game_reset (void)
-{
-    if (button_pressed_p()) {
-        p1_is_ready = 0;
-        p2_is_ready = 0;
-        choice = 0;
-        led_off();
-    }
-}
-
-
-
 //main function for the game
 int main (void)
 {
@@ -161,6 +157,5 @@ int main (void)
         player1_state = select_item();
         player2_state = get_player2_state();
         end_result(player1_state, player2_state);
-        game_reset();
     }
 }

@@ -20,10 +20,9 @@ typedef struct
     bool active_high;
 } button_cfg_t;
 
-int button_pressed_p (void)
+int button_pressed_p(void)
 {
     return pio_input_get(BUTTON);
-    /* TODO.  */
 }
 
 /** Button state structure.  */
