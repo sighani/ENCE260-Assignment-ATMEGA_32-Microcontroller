@@ -1,6 +1,6 @@
 # File:   Makefile
-# Author: M. P. Hayes, UCECE
-# Date:   12 Sep 2010
+# Author: Saman Ighani sig16 78966609 and Mary sho101 23640012
+# Date:   16 October 2018
 # Descr:  Makefile for game
 
 # Definitions.
@@ -59,10 +59,10 @@ ledmat.o: ../../drivers/ledmat.c ../../drivers/avr/pio.h ../../drivers/avr/syste
 font.o: ../../utils/font.c ../../drivers/avr/system.h ../../utils/font.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-led.o: led.c ../../drivers/avr/pio.h ../../drivers/avr/system.h led.h
+led.o: ../../drivers/led.c ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/led.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-button.o: button.c ../../drivers/avr/pio.h ../../drivers/avr/system.h button.h
+button.o: ../../drivers/button.c ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/button.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
@@ -73,7 +73,7 @@ game.out: game.o ir_uart.o pio.o prescale.o system.o timer.o timer0.o usart1.o d
 
 # Target: clean project.
 .PHONY: clean
-clean: 
+clean:
 	-$(DEL) *.o *.out *.hex
 
 
