@@ -16,7 +16,7 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h ../../drivers/navswitch.h ../../utils/pacer.h ../../utils/tinygl.h ../../drivers/avr/ir_uart.h ../../drivers/led.h ../../drivers/button.h
+game.o: game.c ../../drivers/avr/system.h ../../drivers/navswitch.h ../../utils/pacer.h ../../utils/tinygl.h ../../drivers/avr/ir_uart.h ../../drivers/led.h ../../drivers/button.h ../../utils/font.h ../../assignment/split_game/compare.h ../../assignment/split_game/initialise.h ../../assignment/split_game/push4direc.h ../../assignment/split_game/send_recieve.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 system.o: ../../drivers/avr/system.c ../../drivers/avr/system.h
@@ -39,6 +39,18 @@ ir_uart.o: ../../drivers/avr/ir_uart.c ../../drivers/avr/ir_uart.h ../../drivers
 	$(CC) -c $(CFLAGS) $< -o $@
 
 pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+compare.o: compare.c ../../drivers/avr/system.h ../../utils/pacer.h ../../assignment/split_game/compare.h ../../drivers/avr/ir_uart.h ../../utils/tinygl.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+initialise.o: initialise.c ../../drivers/avr/system.h ../../drivers/navswitch.h ../../utils/pacer.h ../../assignment/split_game/initialise.h ../../utils/tinygl.h ../../drivers/avr/ir_uart.h ../../drivers/led.h ../../drivers/button.h ../../utils/font.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+send_recieve.o: send_recieve.c ../../drivers/navswitch.h ../../drivers/avr/ir_uart.h ../../drivers/led.h ../../assignment/split_game/send_recieve.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+push4direc.o: push4direc.c ../../drivers/avr/system.h ../../drivers/navswitch.h ../../assignment/split_game/push4direc.h ../../assignment/split_game/initialise.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 prescale.o: ../../drivers/avr/prescale.c ../../drivers/avr/prescale.h ../../drivers/avr/system.h
@@ -66,14 +78,14 @@ button.o: button.c ../../drivers/avr/pio.h ../../drivers/avr/system.h button.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o ir_uart.o pio.o prescale.o system.o timer.o timer0.o usart1.o display.o ledmat.o navswitch.o font.o pacer.o tinygl.o led.o button.o
+game.out: game.o ir_uart.o pio.o prescale.o system.o timer.o timer0.o usart1.o display.o ledmat.o navswitch.o font.o pacer.o tinygl.o led.o button.o push4direc.o compare.o initialise.o send_recieve.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
 
 # Target: clean project.
 .PHONY: clean
-clean: 
+clean:
 	-$(DEL) *.o *.out *.hex
 
 
