@@ -1,4 +1,4 @@
-Rock Paper Scissor Program
+Rock Paper Scissor Program\n
 Created by Saman Ighani and Mary Hongthongkhan
 The game.c program contains the following modules:
 
